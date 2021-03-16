@@ -5,7 +5,7 @@
 #include <initializer_list>
 
 template<class T> class Vector;
-template<class T> std::ostream& operator<<(std::ostream& os, const Vector<U>& vec);
+template<class U> std::ostream& operator<<(std::ostream& os, const Vector<U>& vec);
 template<class U> std::ostream& operator<<(std::ostream& os, const Vector<U*>& vec);
 
 namespace ertuch
