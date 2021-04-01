@@ -119,37 +119,43 @@ namespace ertuch
     void Vector<T>::Remove(const T& elem)
     {
         int pos = 0;
+        bool isAvailable = false;
+        
         for (std::size_t i = 0; i < size; i++)
             if (elem == elems[i])
             {    
                 pos = i;
+                isAvailable = true;
                 break;
             }
         
-        T temp[size - 1];
-        for (std::size_t i = 0, j = 0; i < size; i++, j++)
-        {    
-            if (j != pos)
-                temp[i] = elems[j];
-            else 
-            {
-                i--;
-                continue;
+        if (isAvailable)
+        {
+            T temp[size - 1];
+            for (std::size_t i = 0, j = 0; j < size; i++, j++)
+            {    
+                if (j != pos)
+                    temp[i] = elems[j];
+                else 
+                {
+                    i--;
+                    continue;
+                }
             }
+
+            delete[] elems;
+            elems = new T[--size];
+
+            for (std::size_t i = 0; i < size; i++)
+                elems[i] = temp[i];
         }
-
-        delete[] elems;
-        elems = new T[--size];
-
-        for (std::size_t i = 0; i < size; i++)
-            elems[i] = temp[i];
     }
 
     template<class T>
     void Vector<T>::Remove_At(std::size_t pos)
     {
         T temp[size - 1];
-        for (std::size_t i = 0, j = 0; i < size; i++, j++)
+        for (std::size_t i = 0, j = 0; j < size; i++, j++)
         {    
             if (j != pos)
                 temp[i] = elems[j];
